@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
 import org.assertj.core.api.AssertionsForClassTypes;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AssertionsKt;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class MemoryMemberRepositoryTest {
-    @Test
+    @AfterEach
     public void afterEach(){
         repository.clearStore();
     }

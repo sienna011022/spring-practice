@@ -2,18 +2,26 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Member;
 
+import com.example.demo.repository.MemoryMemberRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MemberServiceTest {
     MemberService memberService = new MemberService();
+    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    @AfterEach
+    public void AfterEach(){
+        memberRepository.clearStore();
+    }
     @Test
     void join() {
         //given
         Member member = new Member();
-        member.setName("hello");
+        member.setName("spring");
 
         //when
         Long saveId = memberService.join(member);
@@ -25,7 +33,7 @@ class MemberServiceTest {
 
     }
     @Test
-    public void dupicate_member(){
+    public void duplicate_member(){
         //given
         Member member1 = new Member();
         member1.setName("spring");
@@ -35,13 +43,15 @@ class MemberServiceTest {
         //when
         //중복 예외 잡기
         memberService.join(member1);
-        try{
-            memberService.join(member2);
-            fail("예외가 발생해야합니다");
-        }catch(IllegalArgumentException e){
-            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
+        IllegalArgumentException e =  assertThrows(IllegalArgumentException.class,()->memberService.join(member2));
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
+//        try{
+//            memberService.join(member2);
+//            fail("예외가 발생해야합니다");
+//        }catch(IllegalArgumentException e){
+//            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
 
-        }
+
 
        //then
     }
