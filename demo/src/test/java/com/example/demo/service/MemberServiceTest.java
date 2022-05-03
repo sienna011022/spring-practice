@@ -4,6 +4,7 @@ import com.example.demo.domain.Member;
 
 import com.example.demo.repository.MemoryMemberRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -11,8 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class MemberServiceTest {
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+    //dependency injection
+    @BeforeEach
+    public void BeforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memberRepository);
+    }
     @AfterEach
     public void AfterEach(){
         memberRepository.clearStore();
