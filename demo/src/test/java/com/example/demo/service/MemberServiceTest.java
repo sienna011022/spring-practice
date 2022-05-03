@@ -24,6 +24,27 @@ class MemberServiceTest {
         assertThat(member.getName()).isEqualTo(findMember.getName());
 
     }
+    @Test
+    public void dupicate_member(){
+        //given
+        Member member1 = new Member();
+        member1.setName("spring");
+        Member member2 = new Member();
+        member2.setName("spring");
+
+        //when
+        //중복 예외 잡기
+        memberService.join(member1);
+        try{
+            memberService.join(member2);
+            fail("예외가 발생해야합니다");
+        }catch(IllegalArgumentException e){
+            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다");
+
+        }
+
+       //then
+    }
 
     @Test
     void findMembers() {
