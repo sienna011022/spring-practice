@@ -1,10 +1,12 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 //구현체, interface를 implements해본다
+@Repository
 public class MemoryMemberRepository implements MemberRepository{
 
     //저장소
