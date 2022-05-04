@@ -2,12 +2,11 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
-@Service
+
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -15,7 +14,7 @@ public class MemberService {
     //memberrepository를 외부에서 넣어주게끔 바꾼다
     //스프링이 멤버서비스에등록해줌
     //
-    @Autowired
+
     //repository랑 연결
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
