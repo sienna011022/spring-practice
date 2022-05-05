@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.Member;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 //annotaion 뜰때 관리
 @Controller
 public class MemberController {
@@ -13,5 +17,19 @@ public class MemberController {
     @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+    }
+
+    @GetMapping("/members/new")
+    public String createform(){
+        return "members/createMemberForm";
+    }
+    //post는 전달할때-data를  등록할때
+    @PostMapping("/members/new")
+    public String create(MemberForm form){
+        Member member = new Member();
+        member.setName(form.getName());
+        memberService.join(member);
+
+        return "redirect:/";
     }
 }
