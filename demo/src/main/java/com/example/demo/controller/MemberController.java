@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+
 //annotaion 뜰때 관리
 @Controller
 public class MemberController {
@@ -22,15 +23,16 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/members/new")
+    @GetMapping(value = "/members/new")
     public String createform(){
         return "members/createMemberForm";
     }
     //post는 전달할때-data를  등록할때
-    @PostMapping("/members/new")
-    public String create(MemberForm form){
+    @PostMapping(value = "/members/new")
+    public String create(MemberForm form) {
         Member member = new Member();
         member.setName(form.getName());
+        System.out.println("member="+member.getName());
         memberService.join(member);
         return "redirect:/";
     }
